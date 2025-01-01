@@ -1,0 +1,31 @@
+# Target directory, where compiled files are stored
+/target
+
+# Build artifacts
+**/*.rs.bk
+*.rlib
+
+# Cargo-specific files
+/.cargo
+/cargo.lock
+
+# Debug log files
+debug.log
+*.log
+
+# IDE and editor-specific files
+.idea/
+/.vscode/
+/*.swp
+*.swo
+*.bak
+
+# Operating system files
+.DS_Store
+Thumbs.db
+*.~,swo,bkp
+
+# Rust coverage
+*.profraw
+
+.env
