@@ -16,16 +16,16 @@ async fn main() -> std::io::Result<()> {
 
     info!("Initializing MongoDB repository...");
     let mongo_repo = Arc::new(MongoRepo::init().await);
-    let data = web::Data::from(mongo_repo);
+    let data = web::Data::new(mongo_repo);
 
-    info!("Starting Actix Web server on 127.0.0.1:6060...");
+    info!("Starting Actix Web server on 127.0.0.1:8080...");
     print!("Starting Actix Web server on");
     HttpServer::new(move || {
         App::new()
             .app_data(data.clone())
             .configure(routes::init_routes)
     })
-    .bind("127.0.0.1:6060")?
+    .bind("127.0.0.1:8080")?
     .run()
     .await?;
 
