@@ -15,7 +15,6 @@ debug.log
 
 # IDE and editor-specific files
 .idea/
-/.vscode/
 /*.swp
 *.swo
 *.bak

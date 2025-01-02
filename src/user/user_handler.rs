@@ -1,7 +1,7 @@
 // src/user/user_handler.rs
 use actix_web::{web, HttpResponse, HttpRequest};
 use std::sync::Arc;
-use crate::utils::extract_db_name;
+use crate::utils::{extract_db_name, log_memory_usage};
 
 use crate::user::user_model::User;
 use crate::user::user_service;
@@ -67,6 +67,7 @@ pub async fn get_all_users(
     data: web::Data<Arc<MongoRepo>>, // Use Arc here
 ) -> HttpResponse {
     let db_name = extract_db_name(&req);
+    log_memory_usage(); // Log memory usage
 
     match user_service::get_all_users_service(&db_name, data.get_ref().clone()).await {
         Ok(users) => HttpResponse::Ok().json(users),

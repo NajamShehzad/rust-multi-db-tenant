@@ -7,6 +7,7 @@ use crate::todo::todo_service;
 use crate::db::MongoRepo;
 use crate::todo::todo_errors::TodoServiceError;
 use crate::utils::extract_db_name;
+use crate::utils::log_memory_usage;
 
 pub async fn create_todo(
     req: HttpRequest,
@@ -68,6 +69,8 @@ pub async fn get_all_todos(
     data: web::Data<Arc<MongoRepo>>, // Use Arc here
 ) -> HttpResponse {
     let db_name = extract_db_name(&req);
+
+    log_memory_usage(); // Log memory usage
 
     match todo_service::get_all_todos_service(&db_name, data.get_ref().clone()).await {
         Ok(todos) => HttpResponse::Ok().json(todos),
